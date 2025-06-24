@@ -1,0 +1,303 @@
+{
+  "collections": [
+    {
+      "collection": "request_for_quotations",
+      "meta": {
+        "collection": "request_for_quotations",
+        "icon": "request_quote",
+        "note": "ใบขอใบเสนอราคา (RFQ)",
+        "display_template": "{{rfq_number}} - {{pr.pr_number}}",
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": "status",
+        "archive_app_filter": true,
+        "archive_value": "cancelled",
+        "unarchive_value": "draft",
+        "sort_field": "rfq_date",
+        "accountability": "all",
+        "color": "#673AB7",
+        "item_duplication_fields": null,
+        "sort": 4,
+        "group": "Procurement",
+        "collapse": "open"
+      },
+      "schema": {}
+    }
+  ],
+  "fields": [
+    {
+      "collection": "request_for_quotations",
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "name": "id",
+        "table": "request_for_quotations",
+        "data_type": "int unsigned",
+        "is_nullable": false,
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "id",
+        "interface": "input",
+        "readonly": true,
+        "hidden": true,
+        "sort": 1,
+        "width": "full"
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "rfq_number",
+      "type": "string",
+      "schema": {
+        "name": "rfq_number",
+        "table": "request_for_quotations",
+        "data_type": "varchar",
+        "max_length": 50,
+        "is_nullable": false,
+        "is_unique": true
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "rfq_number",
+        "interface": "input",
+        "options": {
+          "placeholder": "RFQ2024001"
+        },
+        "sort": 2,
+        "width": "half",
+        "note": "เลขที่ใบขอใบเสนอราคา",
+        "required": true
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "pr_id",
+      "type": "integer",
+      "schema": {
+        "name": "pr_id",
+        "table": "request_for_quotations",
+        "data_type": "int unsigned",
+        "is_nullable": true,
+        "foreign_key_table": "purchase_requisitions",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "pr_id",
+        "special": ["m2o"],
+        "interface": "select-dropdown-m2o",
+        "options": {
+          "template": "{{pr_number}}"
+        },
+        "sort": 3,
+        "width": "half",
+        "note": "อ้างอิงจากใบขอซื้อ"
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "name": "status",
+        "table": "request_for_quotations",
+        "data_type": "varchar",
+        "max_length": 20,
+        "default_value": "draft",
+        "is_nullable": false
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "status",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "ร่าง", "value": "draft"},
+            {"text": "ส่งแล้ว", "value": "sent"},
+            {"text": "รอใบเสนอราคา", "value": "awaiting_quotes"},
+            {"text": "ได้รับใบเสนอราคาแล้ว", "value": "quotes_received"},
+            {"text": "เสร็จสิ้น", "value": "completed"},
+            {"text": "ยกเลิก", "value": "cancelled"}
+          ]
+        },
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {"text": "ร่าง", "value": "draft", "background": "#D3DAE4", "foreground": "#18222F"},
+            {"text": "ส่งแล้ว", "value": "sent", "background": "#2196F3", "foreground": "#FFFFFF"},
+            {"text": "รอใบเสนอราคา", "value": "awaiting_quotes", "background": "#FF9800", "foreground": "#FFFFFF"},
+            {"text": "ได้รับใบเสนอราคาแล้ว", "value": "quotes_received", "background": "#4CAF50", "foreground": "#FFFFFF"},
+            {"text": "เสร็จสิ้น", "value": "completed", "background": "#673AB7", "foreground": "#FFFFFF"},
+            {"text": "ยกเลิก", "value": "cancelled", "background": "#9E9E9E", "foreground": "#FFFFFF"}
+          ],
+          "showAsDot": true
+        },
+        "sort": 4,
+        "width": "half"
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "rfq_date",
+      "type": "date",
+      "schema": {
+        "name": "rfq_date",
+        "table": "request_for_quotations",
+        "data_type": "date",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "rfq_date",
+        "interface": "datetime",
+        "options": {
+          "includeSeconds": false
+        },
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "sort": 5,
+        "width": "half",
+        "note": "วันที่ขอใบเสนอราคา",
+        "required": true
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "quote_deadline",
+      "type": "date",
+      "schema": {
+        "name": "quote_deadline",
+        "table": "request_for_quotations",
+        "data_type": "date",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "quote_deadline",
+        "interface": "datetime",
+        "options": {
+          "includeSeconds": false
+        },
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "sort": 6,
+        "width": "half",
+        "note": "กำหนดส่งใบเสนอราคา",
+        "required": true
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "delivery_location",
+      "type": "text",
+      "schema": {
+        "name": "delivery_location",
+        "table": "request_for_quotations",
+        "data_type": "text",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "delivery_location",
+        "interface": "textarea",
+        "options": {
+          "placeholder": "สถานที่ส่งมอบ"
+        },
+        "sort": 7,
+        "width": "full",
+        "note": "สถานที่ส่งมอบ"
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "terms_conditions",
+      "type": "text",
+      "schema": {
+        "name": "terms_conditions",
+        "table": "request_for_quotations",
+        "data_type": "text",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "terms_conditions",
+        "interface": "textarea",
+        "options": {
+          "placeholder": "เงื่อนไขและข้อกำหนด"
+        },
+        "sort": 8,
+        "width": "full",
+        "note": "เงื่อนไขและข้อกำหนด"
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "created_by",
+      "type": "uuid",
+      "schema": {
+        "name": "created_by",
+        "table": "request_for_quotations",
+        "data_type": "char",
+        "max_length": 36,
+        "is_nullable": true,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "created_by",
+        "special": ["user-created"],
+        "interface": "select-dropdown-m2o",
+        "options": {
+          "template": "{{first_name}} {{last_name}}"
+        },
+        "display": "user",
+        "sort": 9,
+        "width": "half",
+        "note": "ผู้สร้าง RFQ"
+      }
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "remarks",
+      "type": "text",
+      "schema": {
+        "name": "remarks",
+        "table": "request_for_quotations",
+        "data_type": "text",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "request_for_quotations",
+        "field": "remarks",
+        "interface": "textarea",
+        "options": {
+          "placeholder": "หมายเหตุเพิ่มเติม"
+        },
+        "sort": 10,
+        "width": "full",
+        "note": "หมายเหตุ"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "collection": "request_for_quotations",
+      "field": "pr_id",
+      "related_collection": "purchase_requisitions"
+    },
+    {
+      "collection": "request_for_quotations",
+      "field": "created_by",
+      "related_collection": "directus_users"
+    }
+  ]
+} 

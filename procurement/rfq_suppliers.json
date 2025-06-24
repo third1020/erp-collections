@@ -1,0 +1,213 @@
+{
+  "collections": [
+    {
+      "collection": "rfq_suppliers",
+      "meta": {
+        "collection": "rfq_suppliers",
+        "icon": "group",
+        "note": "ผู้ขายที่ส่ง RFQ ให้",
+        "display_template": "{{rfq.rfq_number}} - {{supplier.supplier_name}}",
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": "#673AB7",
+        "item_duplication_fields": null,
+        "sort": 7,
+        "group": "Procurement",
+        "collapse": "open"
+      },
+      "schema": {}
+    }
+  ],
+  "fields": [
+    {
+      "collection": "rfq_suppliers",
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "name": "id",
+        "table": "rfq_suppliers",
+        "data_type": "int unsigned",
+        "is_nullable": false,
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "collection": "rfq_suppliers",
+        "field": "id",
+        "interface": "input",
+        "readonly": true,
+        "hidden": true,
+        "sort": 1,
+        "width": "full"
+      }
+    },
+    {
+      "collection": "rfq_suppliers",
+      "field": "rfq_id",
+      "type": "integer",
+      "schema": {
+        "name": "rfq_id",
+        "table": "rfq_suppliers",
+        "data_type": "int unsigned",
+        "is_nullable": false,
+        "foreign_key_table": "request_for_quotations",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "collection": "rfq_suppliers",
+        "field": "rfq_id",
+        "special": ["m2o"],
+        "interface": "select-dropdown-m2o",
+        "options": {
+          "template": "{{rfq_number}}"
+        },
+        "sort": 2,
+        "width": "half",
+        "note": "ใบขอใบเสนอราคา",
+        "required": true
+      }
+    },
+    {
+      "collection": "rfq_suppliers",
+      "field": "supplier_id",
+      "type": "integer",
+      "schema": {
+        "name": "supplier_id",
+        "table": "rfq_suppliers",
+        "data_type": "int unsigned",
+        "is_nullable": false,
+        "foreign_key_table": "suppliers",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "collection": "rfq_suppliers",
+        "field": "supplier_id",
+        "special": ["m2o"],
+        "interface": "select-dropdown-m2o",
+        "options": {
+          "template": "{{supplier_name}} ({{supplier_code}})"
+        },
+        "sort": 3,
+        "width": "half",
+        "note": "ผู้ขาย",
+        "required": true
+      }
+    },
+    {
+      "collection": "rfq_suppliers",
+      "field": "sent_date",
+      "type": "timestamp",
+      "schema": {
+        "name": "sent_date",
+        "table": "rfq_suppliers",
+        "data_type": "timestamp",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "rfq_suppliers",
+        "field": "sent_date",
+        "interface": "datetime",
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "sort": 4,
+        "width": "half",
+        "note": "วันที่ส่ง RFQ"
+      }
+    },
+    {
+      "collection": "rfq_suppliers",
+      "field": "response_status",
+      "type": "string",
+      "schema": {
+        "name": "response_status",
+        "table": "rfq_suppliers",
+        "data_type": "varchar",
+        "max_length": 20,
+        "default_value": "sent",
+        "is_nullable": false
+      },
+      "meta": {
+        "collection": "rfq_suppliers",
+        "field": "response_status",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "ส่งแล้ว", "value": "sent"},
+            {"text": "รับทราบแล้ว", "value": "acknowledged"},
+            {"text": "ส่งใบเสนอราคาแล้ว", "value": "quoted"},
+            {"text": "ปฏิเสธ", "value": "declined"},
+            {"text": "ไม่ตอบสนอง", "value": "no_response"}
+          ]
+        },
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {"text": "ส่งแล้ว", "value": "sent", "background": "#2196F3", "foreground": "#FFFFFF"},
+            {"text": "รับทราบแล้ว", "value": "acknowledged", "background": "#FF9800", "foreground": "#FFFFFF"},
+            {"text": "ส่งใบเสนอราคาแล้ว", "value": "quoted", "background": "#4CAF50", "foreground": "#FFFFFF"},
+            {"text": "ปฏิเสธ", "value": "declined", "background": "#F44336", "foreground": "#FFFFFF"},
+            {"text": "ไม่ตอบสนอง", "value": "no_response", "background": "#9E9E9E", "foreground": "#FFFFFF"}
+          ],
+          "showAsDot": true
+        },
+        "sort": 5,
+        "width": "half"
+      }
+    },
+    {
+      "collection": "rfq_suppliers",
+      "field": "contact_person",
+      "type": "string",
+      "schema": {
+        "name": "contact_person",
+        "table": "rfq_suppliers",
+        "data_type": "varchar",
+        "max_length": 255,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "rfq_suppliers",
+        "field": "contact_person",
+        "interface": "input",
+        "options": {
+          "placeholder": "ผู้ติดต่อ"
+        },
+        "sort": 6,
+        "width": "half",
+        "note": "ผู้ติดต่อ"
+      }
+    },
+    {
+      "collection": "rfq_suppliers",
+      "field": "contact_email",
+      "type": "string",
+      "schema": {
+        "name": "contact_email",
+        "table": "rfq_suppliers",
+        "data_type": "varchar",
+        "max_length": 255,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "rfq_suppliers",
+        "field": "contact_email",
+        "interface": "input",
+        "options": {
+          "placeholder": "อีเมลติดต่อ"
+        },
+        "sort": 7,
+        "width": "half",
+        "note": "อีเมลติดต่อ"
+      }
+    }
+  ]
+} 

@@ -1,0 +1,292 @@
+{
+  "collections": [
+    {
+      "collection": "suppliers",
+      "meta": {
+        "collection": "suppliers",
+        "icon": "business",
+        "note": "ข้อมูลผู้จัดจำหน่าย/ผู้ขาย",
+        "display_template": "{{supplier_name}} ({{supplier_code}})",
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": "status",
+        "archive_app_filter": true,
+        "archive_value": "inactive",
+        "unarchive_value": "active",
+        "sort_field": "supplier_name",
+        "accountability": "all",
+        "color": "#2196F3",
+        "item_duplication_fields": null,
+        "sort": 1,
+        "group": "Procurement",
+        "collapse": "open"
+      },
+      "schema": {}
+    }
+  ],
+  "fields": [
+    {
+      "collection": "suppliers",
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "name": "id",
+        "table": "suppliers",
+        "data_type": "int unsigned",
+        "default_value": null,
+        "is_nullable": false,
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "id",
+        "interface": "input",
+        "readonly": true,
+        "hidden": true,
+        "sort": 1,
+        "width": "full"
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "supplier_code",
+      "type": "string",
+      "schema": {
+        "name": "supplier_code",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 50,
+        "is_nullable": false,
+        "is_unique": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "supplier_code",
+        "interface": "input",
+        "options": {
+          "placeholder": "SUP001"
+        },
+        "sort": 2,
+        "width": "half",
+        "note": "รหัสผู้ขาย (ไม่ซ้ำ)",
+        "required": true
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "supplier_name",
+      "type": "string",
+      "schema": {
+        "name": "supplier_name",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 255,
+        "is_nullable": false
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "supplier_name",
+        "interface": "input",
+        "options": {
+          "placeholder": "ชื่อบริษัท/ผู้ขาย"
+        },
+        "sort": 3,
+        "width": "half",
+        "required": true
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "contact_person",
+      "type": "string",
+      "schema": {
+        "name": "contact_person",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 255,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "contact_person",
+        "interface": "input",
+        "options": {
+          "placeholder": "ชื่อผู้ติดต่อ"
+        },
+        "sort": 4,
+        "width": "half",
+        "group": "contact_info"
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "phone",
+      "type": "string",
+      "schema": {
+        "name": "phone",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 20,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "phone",
+        "interface": "input",
+        "options": {
+          "placeholder": "02-xxx-xxxx"
+        },
+        "sort": 5,
+        "width": "half",
+        "group": "contact_info"
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "email",
+      "type": "string",
+      "schema": {
+        "name": "email",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 255,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "email",
+        "interface": "input",
+        "options": {
+          "placeholder": "contact@supplier.com"
+        },
+        "sort": 6,
+        "width": "full",
+        "group": "contact_info",
+        "validation": {
+          "_and": [
+            {
+              "email": {
+                "_submitted": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "address",
+      "type": "text",
+      "schema": {
+        "name": "address",
+        "table": "suppliers",
+        "data_type": "text",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "address",
+        "interface": "textarea",
+        "options": {
+          "placeholder": "ที่อยู่ผู้ขาย"
+        },
+        "sort": 7,
+        "width": "full",
+        "group": "contact_info"
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "tax_id",
+      "type": "string",
+      "schema": {
+        "name": "tax_id",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 20,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "tax_id",
+        "interface": "input",
+        "options": {
+          "placeholder": "เลขประจำตัวผู้เสียภาษี"
+        },
+        "sort": 8,
+        "width": "half",
+        "group": "business_info"
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "payment_terms",
+      "type": "string",
+      "schema": {
+        "name": "payment_terms",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 50,
+        "default_value": "30",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "payment_terms",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "ชำระเงินสด", "value": "cash"},
+            {"text": "เครดิต 7 วัน", "value": "7"},
+            {"text": "เครดิต 15 วัน", "value": "15"},
+            {"text": "เครดิต 30 วัน", "value": "30"},
+            {"text": "เครดิต 45 วัน", "value": "45"},
+            {"text": "เครดิต 60 วัน", "value": "60"}
+          ]
+        },
+        "sort": 9,
+        "width": "half",
+        "note": "เงื่อนไขการชำระเงิน",
+        "group": "business_info"
+      }
+    },
+    {
+      "collection": "suppliers",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "name": "status",
+        "table": "suppliers",
+        "data_type": "varchar",
+        "max_length": 20,
+        "default_value": "active",
+        "is_nullable": false
+      },
+      "meta": {
+        "collection": "suppliers",
+        "field": "status",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "ใช้งาน", "value": "active"},
+            {"text": "ระงับการใช้งาน", "value": "inactive"}
+          ]
+        },
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {"text": "ใช้งาน", "value": "active", "background": "var(--primary)", "foreground": "#FFFFFF"},
+            {"text": "ระงับการใช้งาน", "value": "inactive", "background": "var(--warning)", "foreground": "#FFFFFF"}
+          ],
+          "showAsDot": true
+        },
+        "sort": 10,
+        "width": "half",
+        "group": "business_info"
+      }
+    }
+  ],
+  "relations": []
+} 
