@@ -1,0 +1,399 @@
+{
+  "collections": [
+    {
+      "collection": "purchase_requisitions",
+      "meta": {
+        "collection": "purchase_requisitions",
+        "icon": "description",
+        "note": "ใบขอซื้อ (Purchase Requisition)",
+        "display_template": "{{pr_number}} - {{requester.first_name}} {{requester.last_name}}",
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": "status",
+        "archive_app_filter": true,
+        "archive_value": "cancelled",
+        "unarchive_value": "draft",
+        "sort_field": "request_date",
+        "accountability": "all",
+        "color": "#FF9800",
+        "item_duplication_fields": null,
+        "sort": 2,
+        "group": "Procurement",
+        "collapse": "open"
+      },
+      "schema": {}
+    }
+  ],
+  "fields": [
+    {
+      "collection": "purchase_requisitions",
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "name": "id",
+        "table": "purchase_requisitions",
+        "data_type": "int unsigned",
+        "is_nullable": false,
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "id",
+        "interface": "input",
+        "readonly": true,
+        "hidden": true,
+        "sort": 1,
+        "width": "full"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "pr_number",
+      "type": "string",
+      "schema": {
+        "name": "pr_number",
+        "table": "purchase_requisitions",
+        "data_type": "varchar",
+        "max_length": 50,
+        "is_nullable": false,
+        "is_unique": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "pr_number",
+        "interface": "input",
+        "options": {
+          "placeholder": "PR2024001"
+        },
+        "sort": 2,
+        "width": "half",
+        "note": "เลขที่ใบขอซื้อ",
+        "required": true
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "name": "status",
+        "table": "purchase_requisitions",
+        "data_type": "varchar",
+        "max_length": 20,
+        "default_value": "draft",
+        "is_nullable": false
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "status",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "ร่าง", "value": "draft"},
+            {"text": "รออนุมัติ", "value": "pending_approval"},
+            {"text": "อนุมัติแล้ว", "value": "approved"},
+            {"text": "ไม่อนุมัติ", "value": "rejected"},
+            {"text": "ดำเนินการแล้ว", "value": "processed"},
+            {"text": "ยกเลิก", "value": "cancelled"}
+          ]
+        },
+        "display": "labels",
+        "display_options": {
+          "choices": [
+            {"text": "ร่าง", "value": "draft", "background": "#D3DAE4", "foreground": "#18222F"},
+            {"text": "รออนุมัติ", "value": "pending_approval", "background": "#FFC107", "foreground": "#FFFFFF"},
+            {"text": "อนุมัติแล้ว", "value": "approved", "background": "#4CAF50", "foreground": "#FFFFFF"},
+            {"text": "ไม่อนุมัติ", "value": "rejected", "background": "#F44336", "foreground": "#FFFFFF"},
+            {"text": "ดำเนินการแล้ว", "value": "processed", "background": "#2196F3", "foreground": "#FFFFFF"},
+            {"text": "ยกเลิก", "value": "cancelled", "background": "#9E9E9E", "foreground": "#FFFFFF"}
+          ],
+          "showAsDot": true
+        },
+        "sort": 3,
+        "width": "half"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "requester",
+      "type": "uuid",
+      "schema": {
+        "name": "requester",
+        "table": "purchase_requisitions",
+        "data_type": "char",
+        "max_length": 36,
+        "is_nullable": true,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "requester",
+        "special": ["user-created"],
+        "interface": "select-dropdown-m2o",
+        "options": {
+          "template": "{{first_name}} {{last_name}}"
+        },
+        "display": "user",
+        "sort": 4,
+        "width": "half",
+        "note": "ผู้ขอซื้อ",
+        "required": true,
+        "group": "request_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "department",
+      "type": "string",
+      "schema": {
+        "name": "department",
+        "table": "purchase_requisitions",
+        "data_type": "varchar",
+        "max_length": 100,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "department",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "แผนกบริหาร", "value": "administration"},
+            {"text": "แผนกการเงิน", "value": "finance"},
+            {"text": "แผนกขาย", "value": "sales"},
+            {"text": "แผนกผลิต", "value": "production"},
+            {"text": "แผนก IT", "value": "it"},
+            {"text": "แผนกทรัพยากรบุคคล", "value": "hr"}
+          ],
+          "allow_other": true
+        },
+        "sort": 5,
+        "width": "half",
+        "note": "แผนกผู้ขอซื้อ",
+        "group": "request_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "request_date",
+      "type": "date",
+      "schema": {
+        "name": "request_date",
+        "table": "purchase_requisitions",
+        "data_type": "date",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "request_date",
+        "interface": "datetime",
+        "options": {
+          "includeSeconds": false
+        },
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "sort": 6,
+        "width": "half",
+        "note": "วันที่ขอซื้อ",
+        "required": true,
+        "group": "request_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "required_date",
+      "type": "date",
+      "schema": {
+        "name": "required_date",
+        "table": "purchase_requisitions",
+        "data_type": "date",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "required_date",
+        "interface": "datetime",
+        "options": {
+          "includeSeconds": false
+        },
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "sort": 7,
+        "width": "half",
+        "note": "วันที่ต้องการได้รับสินค้า",
+        "required": true,
+        "group": "request_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "reason",
+      "type": "text",
+      "schema": {
+        "name": "reason",
+        "table": "purchase_requisitions",
+        "data_type": "text",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "reason",
+        "interface": "textarea",
+        "options": {
+          "placeholder": "เหตุผลในการขอซื้อ"
+        },
+        "sort": 8,
+        "width": "full",
+        "note": "เหตุผลในการขอซื้อ",
+        "required": true,
+        "group": "request_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "budget_code",
+      "type": "string",
+      "schema": {
+        "name": "budget_code",
+        "table": "purchase_requisitions",
+        "data_type": "varchar",
+        "max_length": 50,
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "budget_code",
+        "interface": "input",
+        "options": {
+          "placeholder": "รหัสงบประมาณ"
+        },
+        "sort": 9,
+        "width": "half",
+        "note": "รหัสงบประมาณที่ใช้",
+        "group": "financial_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "total_amount",
+      "type": "decimal",
+      "schema": {
+        "name": "total_amount",
+        "table": "purchase_requisitions",
+        "data_type": "decimal",
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "default_value": "0.00",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "total_amount",
+        "interface": "input",
+        "display": "formatted-value",
+        "display_options": {
+          "format": true,
+          "currency": "THB"
+        },
+        "readonly": true,
+        "sort": 10,
+        "width": "half",
+        "note": "ยอดรวมประมาณการ (บาท)",
+        "group": "financial_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "approver",
+      "type": "uuid",
+      "schema": {
+        "name": "approver",
+        "table": "purchase_requisitions",
+        "data_type": "char",
+        "max_length": 36,
+        "is_nullable": true,
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "approver",
+        "interface": "select-dropdown-m2o",
+        "options": {
+          "template": "{{first_name}} {{last_name}}"
+        },
+        "display": "user",
+        "sort": 11,
+        "width": "half",
+        "note": "ผู้อนุมัติ",
+        "group": "approval_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "approved_date",
+      "type": "timestamp",
+      "schema": {
+        "name": "approved_date",
+        "table": "purchase_requisitions",
+        "data_type": "timestamp",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "approved_date",
+        "interface": "datetime",
+        "display": "datetime",
+        "display_options": {
+          "relative": true
+        },
+        "sort": 12,
+        "width": "half",
+        "note": "วันที่อนุมัติ",
+        "group": "approval_info"
+      }
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "remarks",
+      "type": "text",
+      "schema": {
+        "name": "remarks",
+        "table": "purchase_requisitions",
+        "data_type": "text",
+        "is_nullable": true
+      },
+      "meta": {
+        "collection": "purchase_requisitions",
+        "field": "remarks",
+        "interface": "textarea",
+        "options": {
+          "placeholder": "หมายเหตุเพิ่มเติม"
+        },
+        "sort": 13,
+        "width": "full",
+        "note": "หมายเหตุ",
+        "group": "approval_info"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "collection": "purchase_requisitions",
+      "field": "requester",
+      "related_collection": "directus_users"
+    },
+    {
+      "collection": "purchase_requisitions",
+      "field": "approver",
+      "related_collection": "directus_users"
+    }
+  ]
+}

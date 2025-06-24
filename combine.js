@@ -7,7 +7,6 @@ const folder = process.argv[2];
 
 if (!folder) {
   console.log('Please provide folder name');
-  console.log('Usage: node combine.js procurement');
   process.exit(1);
 }
 
@@ -42,8 +41,3 @@ fs.writeFileSync(
   path.join(dir, 'all.json'),
   JSON.stringify(all, null, 2),
 );
-
-console.log(`Generated ${path.join(dir, 'all.json')} with:`);
-console.log(`- ${all.collections.length} collections`);
-console.log(`- ${all.fields.length} fields`);
-console.log(`- ${all.relations.length} relations`);
